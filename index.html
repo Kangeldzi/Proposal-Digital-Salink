@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050B18">
+<meta name="description" content="SALINK — Sistem Alert Lingkungan Terpadu. Proposal kerja sama digital berbasis komunitas.">
+<title>SALINK — Digital Partnership Proposal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif'],display:['Manrope','sans-serif']},colors:{
+ink:'#050B18',navy:'#071426',blue:'#00A8FF',cyan:'#00D9FF',danger:'#FF1E2D'
+}}}}
+</script>
+<style>
+:root{--bg:#050B18;--panel:#0a1730;--panel2:#0d1d3a;--line:rgba(148,163,184,.16);--blue:#00A8FF;--cyan:#00D9FF;--red:#FF1E2D;--text:#eef5ff;--muted:#94a3b8}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,sans-serif;overflow-x:hidden}
+::selection{background:#00a8ff55;color:#fff}.display{font-family:Manrope,Inter,sans-serif}
+.glass{background:linear-gradient(145deg,rgba(15,31,61,.86),rgba(6,16,34,.72));border:1px solid var(--line);box-shadow:0 24px 80px rgba(0,0,0,.25);backdrop-filter:blur(18px)}
+.grid-bg{background-image:linear-gradient(rgba(0,168,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(0,168,255,.045) 1px,transparent 1px);background-size:42px 42px}
+.noise:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");z-index:60}
+.hero-glow{background:radial-gradient(circle at 72% 36%,rgba(0,168,255,.18),transparent 25%),radial-gradient(circle at 75% 42%,rgba(255,30,45,.14),transparent 18%)}
+.orb{border-radius:999px;filter:blur(1px);animation:float 7s ease-in-out infinite}.orb2{animation-delay:-3s}
+@keyframes float{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-18px,0)}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}.reveal.show{opacity:1;transform:none}
+.pulse-red{animation:pulseRed 2s infinite}@keyframes pulseRed{0%,100%{box-shadow:0 0 0 0 rgba(255,30,45,.35)}50%{box-shadow:0 0 0 12px rgba(255,30,45,0)}}
+.ring{border:1px solid rgba(0,217,255,.28);border-radius:999px;position:absolute;inset:10%;animation:spin 22s linear infinite}.ring.r2{inset:20%;animation-duration:15s;animation-direction:reverse}.ring.r3{inset:30%;animation-duration:10s}@keyframes spin{to{transform:rotate(360deg)}}
+.scan{position:absolute;left:50%;top:50%;width:50%;height:2px;transform-origin:left center;background:linear-gradient(90deg,rgba(0,217,255,.8),transparent);animation:scan 4s linear infinite}@keyframes scan{to{transform:rotate(360deg)}}
+.kicker{letter-spacing:.22em;text-transform:uppercase;color:#6ddcff;font-size:.72rem;font-weight:800}
+.section-line{height:1px;background:linear-gradient(90deg,rgba(0,168,255,.7),transparent)}
+.card-hover{transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease}.card-hover:hover{transform:translateY(-5px);border-color:rgba(0,217,255,.35);box-shadow:0 22px 60px rgba(0,0,0,.25)}
+.nav-link{color:#9fb0c8;font-size:.78rem;font-weight:700;transition:.25s}.nav-link:hover,.nav-link.active{color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;border-radius:999px;padding:.8rem 1.05rem;font-weight:800;font-size:.78rem;transition:.25s}.btn:hover{transform:translateY(-2px)}.btn-primary{background:linear-gradient(135deg,#00a8ff,#006eff);color:#fff;box-shadow:0 12px 35px rgba(0,168,255,.22)}.btn-ghost{border:1px solid var(--line);background:rgba(255,255,255,.035);color:#dbeafe}
+.metric{font-size:clamp(2.1rem,5vw,4.6rem);line-height:1;font-weight:900}.big-title{font-size:clamp(3rem,8vw,7.8rem);line-height:.9;letter-spacing:-.07em}
+.chapter{font-size:clamp(4.5rem,12vw,11rem);font-weight:900;line-height:.8;color:rgba(255,255,255,.035);letter-spacing:-.08em}
+.badge{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .6rem;border-radius:999px;border:1px solid var(--line);font-size:.64rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#b9c9df}
+.status{padding:.22rem .5rem;border-radius:999px;font-size:.58rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border:1px solid rgba(255,255,255,.12)}
+.status.target{color:#7dd3fc;background:#0c4a6e44}.status.proposed{color:#fcd34d;background:#713f1244}.status.validation{color:#fda4af;background:#88133744}.status.internal{color:#c4b5fd;background:#4c1d9544}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:1rem}.proposal-table{width:100%;min-width:720px;border-collapse:collapse}.proposal-table th,.proposal-table td{padding:1rem;border-bottom:1px solid var(--line);text-align:left}.proposal-table th{color:#a9bdd7;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em}.proposal-table td{color:#e5eefb;font-size:.88rem}.proposal-table tr:last-child td{border-bottom:0}
+.timeline{position:relative}.timeline:before{content:"";position:absolute;left:18px;top:0;bottom:0;width:1px;background:linear-gradient(var(--blue),rgba(0,168,255,.05))}
+.timeline-item{position:relative;padding-left:54px}.timeline-dot{position:absolute;left:10px;top:8px;width:17px;height:17px;border-radius:50%;background:#071426;border:3px solid var(--blue);box-shadow:0 0 22px rgba(0,168,255,.35)}
+.modal{opacity:0;pointer-events:none;transition:.25s}.modal.open{opacity:1;pointer-events:auto}
+@media print{body{background:#fff!important;color:#111!important}.no-print,nav,#loader,.noise:before{display:none!important}.glass{background:#fff!important;color:#111!important;box-shadow:none!important;border:1px solid #ddd!important}.reveal{opacity:1!important;transform:none!important}.print-dark{color:#111!important}.page{page-break-before:always}.proposal-table{min-width:0}.hero-screen{min-height:auto!important;padding-top:40px!important}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+/* === FINAL MOBILE / SIGNATURE REFINEMENT === */
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+img{max-width:100%;height:auto}
+.table-wrap{width:100%;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.approval-signature{display:block;width:150px;height:58px;object-fit:contain;object-position:center;margin:auto;mix-blend-mode:multiply}
+.proposer-signature{display:block;width:185px;height:92px;object-fit:contain;object-position:center;mix-blend-mode:multiply}
+@media(max-width:640px){
+  .max-w-\[1500px\],.max-w-\[1300px\],.max-w-\[1200px\],.max-w-\[1100px\]{max-width:100%;}
+  .table-wrap table{min-width:620px}
+  .approval-signature{width:125px;height:52px}
+  .proposer-signature{width:165px;height:82px}
+  .glass{max-width:100%;}
+  section,header,footer,nav,main,div{max-width:100%;}
+}
+@media(min-width:641px){
+  .table-wrap table{min-width:0}
+}
+</style>
+</head>
+<body class="noise">
+<div id="loader" class="fixed inset-0 z-[100] bg-[#050B18] flex items-center justify-center">
+  <div class="text-center w-[min(360px,85vw)]">
+    <div class="mx-auto mb-6 w-20 h-20 rounded-2xl overflow-hidden border border-white/10 bg-white/5">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh-b9j4cBCdPUpyMmAfxy9HFaYGN-TgSHLckEpd76ocmTcpaADtxDnMheUW04Kf7iTSj7uOq3XI_g62NShO1-mQVvgOUcRN2C712Y9rEPnxqVAdzfiHaNNylKHOhgYNvfUZghHYJbAZkBeYNyTcE53S07ebJtoKnujOWTgUCQ1bRmZEfI9B4ErQ69iWEoA/s512/1000923527.jpg" class="w-full h-full object-cover" alt="Logo SALINK">
+    </div>
+    <div class="display font-black tracking-[.28em] text-xl">SALINK</div>
+    <div class="mt-2 text-xs uppercase tracking-[.25em] text-slate-500">System initializing...</div>
+    <div class="mt-7 h-1 rounded-full bg-white/10 overflow-hidden"><div id="loadbar" class="h-full w-0 bg-gradient-to-r from-cyan-400 to-blue-500 transition-all duration-1000"></div></div>
+    <div id="loadpct" class="mt-3 text-xs text-slate-500">0%</div>
+  </div>
+</div>
+
+<header class="no-print fixed top-0 inset-x-0 z-50 border-b border-white/5 bg-[#050B18]/75 backdrop-blur-xl">
+  <div class="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="#cover" class="flex items-center gap-3">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh-b9j4cBCdPUpyMmAfxy9HFaYGN-TgSHLckEpd76ocmTcpaADtxDnMheUW04Kf7iTSj7uOq3XI_g62NShO1-mQVvgOUcRN2C712Y9rEPnxqVAdzfiHaNNylKHOhgYNvfUZghHYJbAZkBeYNyTcE53S07ebJtoKnujOWTgUCQ1bRmZEfI9B4ErQ69iWEoA/s512/1000923527.jpg" class="w-9 h-9 rounded-xl object-cover" alt="SALINK">
+      <div class="hidden sm:block"><div class="font-black text-sm">SALINK</div><div class="text-[9px] text-slate-500 uppercase tracking-[.18em]">Digital Proposal</div></div>
+    </a>
+    <nav id="desktopNav" class="hidden xl:flex items-center gap-5">
+      <a class="nav-link" href="#cover">Overview</a><a class="nav-link" href="#bab1">Pendahuluan</a><a class="nav-link" href="#bab2">Profil</a><a class="nav-link" href="#bab3">Situasi</a><a class="nav-link" href="#bab4">Kerja Sama</a><a class="nav-link" href="#bab5">Roadmap</a><a class="nav-link" href="#bab6">Dampak</a><a class="nav-link" href="#bab7">Penutup</a>
+    </nav>
+    <div class="flex items-center gap-2">
+      <button class="btn btn-ghost no-print hidden sm:inline-flex" onclick="presentationMode()">Presentation</button>
+      <button class="btn btn-primary no-print" onclick="window.print()">Print / PDF</button>
+      <button class="xl:hidden no-print p-2 rounded-xl border border-white/10" onclick="toggleMenu()" aria-label="Buka menu">☰</button>
+    </div>
+  </div>
+  <div id="mobileMenu" class="hidden xl:hidden px-4 pb-4 bg-[#050B18]/95">
+    <div class="grid grid-cols-2 gap-2">
+      <a class="btn btn-ghost" href="#cover" onclick="toggleMenu()">Overview</a><a class="btn btn-ghost" href="#bab1" onclick="toggleMenu()">Pendahuluan</a><a class="btn btn-ghost" href="#bab2" onclick="toggleMenu()">Profil</a><a class="btn btn-ghost" href="#bab3" onclick="toggleMenu()">Situasi</a><a class="btn btn-ghost" href="#bab4" onclick="toggleMenu()">Kerja Sama</a><a class="btn btn-ghost" href="#bab5" onclick="toggleMenu()">Roadmap</a><a class="btn btn-ghost" href="#bab6" onclick="toggleMenu()">Dampak</a><a class="btn btn-ghost" href="#bab7" onclick="toggleMenu()">Penutup</a>
+    </div>
+  </div>
+</header>
+<div class="no-print fixed top-16 left-0 right-0 z-40 h-[2px] bg-white/5"><div id="progress" class="h-full bg-gradient-to-r from-cyan-400 to-blue-500 w-0"></div></div>
+
+<main>
+<section id="cover" class="hero-screen min-h-screen relative overflow-hidden hero-glow grid-bg flex items-center pt-20">
+  <div class="absolute w-80 h-80 rounded-full bg-blue-500/10 blur-3xl -right-20 top-20 orb"></div><div class="absolute w-64 h-64 rounded-full bg-red-500/10 blur-3xl right-1/3 bottom-10 orb orb2"></div>
+  <div class="max-w-[1500px] w-full mx-auto px-5 sm:px-8 lg:px-12 py-20">
+    <div class="grid lg:grid-cols-[1.05fr_.95fr] gap-12 lg:gap-16 items-center">
+      <div class="reveal">
+        <div class="flex items-center gap-3 mb-7"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh-b9j4cBCdPUpyMmAfxy9HFaYGN-TgSHLckEpd76ocmTcpaADtxDnMheUW04Kf7iTSj7uOq3XI_g62NShO1-mQVvgOUcRN2C712Y9rEPnxqVAdzfiHaNNylKHOhgYNvfUZghHYJbAZkBeYNyTcE53S07ebJtoKnujOWTgUCQ1bRmZEfI9B4ErQ69iWEoA/s512/1000923527.jpg" class="w-16 h-16 rounded-2xl object-cover shadow-2xl" alt="Logo SALINK"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjBKnaWBTIFZ9RC_C6Dk8RnXG5G4G5LvxEgZhuAmjmnYQvXuwd5kCjHMpCNTQsOHzM_Wnp9WqajtniOxqfqw2dmD01tpB1_X-tpDMPnzpzgO_3FcAd4yQe-Ey2QwnBkp3ruml4yoBQhK4hqegfgQ0olfB51G-vFjcf_NB2SYWQvP9xNSgnKGTjgBM7gY3o/s512/1000007259.png" class="w-14 h-14 object-contain" alt="Logo Karang Taruna"><span class="badge">Digital Proposal • 2026</span></div>
+        <div class="kicker mb-4">Government & Community Partnership</div>
+        <h1 class="display big-title font-black">PROPOSAL<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-100 to-cyan-400">KERJA SAMA</span></h1>
+        <div class="mt-7 text-4xl sm:text-5xl font-black display">SALINK</div>
+        <p class="mt-2 text-xl sm:text-2xl text-cyan-300 font-semibold">Sistem Alert Lingkungan Terpadu Berbasis Komunitas</p>
+        <p class="mt-6 max-w-2xl text-slate-300 leading-relaxed">Teknologi digital untuk mempercepat respons, memperkuat koordinasi, dan membangun keselamatan berbasis komunitas.</p>
+        <div class="mt-8 grid sm:grid-cols-2 gap-3 text-sm">
+          <div class="glass rounded-2xl p-4"><span class="text-slate-500 text-xs uppercase tracking-widest">Diajukan kepada</span><div class="font-bold mt-1">Instansi Pemerintah & Mitra Strategis Terkait</div></div>
+          <div class="glass rounded-2xl p-4"><span class="text-slate-500 text-xs uppercase tracking-widest">Diajukan oleh</span><div class="font-bold mt-1">Komunitas Karang Taruna SALINK</div></div>
+        </div>
+        <div class="mt-6 flex flex-wrap gap-2 text-xs text-slate-400"><span class="badge">SALINK/PROP/XI/2026/001</span><span class="badge">Oktober 2026</span><span class="badge">Version 2.4 — Final</span></div>
+        <div class="mt-8 flex flex-wrap gap-3"><a href="#toc" class="btn btn-primary">Jelajahi Proposal →</a><button class="btn btn-ghost no-print" onclick="presentationMode()">Presentation Mode</button></div>
+      </div>
+      <div class="reveal relative">
+        <div class="relative mx-auto w-[min(560px,90vw)] aspect-square">
+          <div class="absolute inset-0 rounded-full bg-blue-500/10 blur-3xl"></div><div class="ring"></div><div class="ring r2"></div><div class="ring r3"></div><div class="scan"></div>
+          <div class="absolute inset-[18%] rounded-[3rem] glass p-7 flex flex-col items-center justify-center shadow-2xl">
+            <div class="absolute top-5 left-5 right-5 flex justify-between text-[9px] uppercase tracking-[.22em] text-slate-500"><span>Emergency Network</span><span>Live Concept</span></div>
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh-b9j4cBCdPUpyMmAfxy9HFaYGN-TgSHLckEpd76ocmTcpaADtxDnMheUW04Kf7iTSj7uOq3XI_g62NShO1-mQVvgOUcRN2C712Y9rEPnxqVAdzfiHaNNylKHOhgYNvfUZghHYJbAZkBeYNyTcE53S07ebJtoKnujOWTgUCQ1bRmZEfI9B4ErQ69iWEoA/s512/1000923527.jpg" class="w-[78%] aspect-square object-cover rounded-[2rem]" alt="SALINK Emergency Logo">
+            <div class="mt-5 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-red-500 pulse-red"></span><span class="text-xs font-bold uppercase tracking-[.18em] text-slate-300">Emergency Alert System</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="toc" class="py-24 border-t border-white/5">
+<div class="max-w-[1300px] mx-auto px-5 sm:px-8">
+<div class="reveal flex items-end justify-between gap-6 mb-10"><div><div class="kicker">Navigation</div><h2 class="display text-4xl sm:text-5xl font-black mt-2">Daftar Isi Proposal</h2></div><div class="badge">01 / 07 Chapters</div></div>
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+<a href="#bab1" class="glass card-hover rounded-3xl p-6"><div class="chapter">01</div><div class="font-black mt-3">Pendahuluan</div><div class="text-sm text-slate-500 mt-2">Latar belakang, visi, misi & tujuan.</div></a>
+<a href="#bab2" class="glass card-hover rounded-3xl p-6"><div class="chapter">02</div><div class="font-black mt-3">Profil SALINK</div><div class="text-sm text-slate-500 mt-2">Platform, fitur & arsitektur teknologi.</div></a>
+<a href="#bab3" class="glass card-hover rounded-3xl p-6"><div class="chapter">03</div><div class="font-black mt-3">Analisis Situasi</div><div class="text-sm text-slate-500 mt-2">Statistik, gap analysis & target manfaat.</div></a>
+<a href="#bab4" class="glass card-hover rounded-3xl p-6"><div class="chapter">04</div><div class="font-black mt-3">Kerja Sama</div><div class="text-sm text-slate-500 mt-2">Model kemitraan & kebutuhan sumber daya.</div></a>
+<a href="#bab5" class="glass card-hover rounded-3xl p-6"><div class="chapter">05</div><div class="font-black mt-3">Roadmap</div><div class="text-sm text-slate-500 mt-2">Implementasi 24 bulan & KPI.</div></a>
+<a href="#bab6" class="glass card-hover rounded-3xl p-6"><div class="chapter">06</div><div class="font-black mt-3">Dampak</div><div class="text-sm text-slate-500 mt-2">Impact, cost-benefit & sustainability.</div></a>
+<a href="#bab7" class="glass card-hover rounded-3xl p-6"><div class="chapter">07</div><div class="font-black mt-3">Penutup</div><div class="text-sm text-slate-500 mt-2">Kesimpulan, ajakan & kontak.</div></a>
+<a href="#appendix" class="glass card-hover rounded-3xl p-6"><div class="chapter">A</div><div class="font-black mt-3">Lampiran</div><div class="text-sm text-slate-500 mt-2">Dokumen, persetujuan & checklist.</div></a>
+</div>
+</div>
+</section>
+
+<section class="py-20 bg-white/[.02]">
+<div class="max-w-[1100px] mx-auto px-5 sm:px-8">
+<div class="reveal glass rounded-[2rem] p-7 sm:p-10">
+<div class="flex flex-col sm:flex-row items-center gap-8">
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjBKnaWBTIFZ9RC_C6Dk8RnXG5G4G5LvxEgZhuAmjmnYQvXuwd5kCjHMpCNTQsOHzM_Wnp9WqajtniOxqfqw2dmD01tpB1_X-tpDMPnzpzgO_3FcAd4yQe-Ey2QwnBkp3ruml4yoBQhK4hqegfgQ0olfB51G-vFjcf_NB2SYWQvP9xNSgnKGTjgBM7gY3o/s512/1000007259.png" class="w-28 h-28 object-contain" alt="Logo Karang Taruna">
+<div class="flex-1"><div class="kicker">Lembar Pengesahan</div><h2 class="display text-3xl font-black mt-2">Proposal Kerja Sama SALINK</h2><p class="text-slate-400 mt-2">Sistem Alert Lingkungan Terpadu Berbasis Komunitas</p></div>
+</div>
+<div class="table-wrap mt-8"><table class="proposal-table"><thead><tr><th>Jabatan</th><th>Nama</th><th>Tanda Tangan</th></tr></thead><tbody>
+<tr><td>Ketua Umum</td><td>Eldi Sugianto, S.Kom</td><td><img class="approval-signature" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjgu1MAbGU7c5LzuuR8MdxslCZVOm8YM9mniEu3-PKAAbiy3VNjNEEEEYbgYfQUVVhew56sxuoSCQSaGi6Bqh27WQd3HbL0vaOBN5iTao01ij_TTmveuZbiRA4zsGuRr_h3jx2MIvrgLMdhV-2_WsXdbwMkMbO_fZVewtc2KG9bhrEj_LSDlqR89TyD2wQ/s1280/1001004823.png" alt="Tanda tangan Eldi Sugianto, S.Kom"></td></tr><tr><td>Founder &amp; Developer</td><td>Eldi Sugianto, S.Kom</td><td><img class="approval-signature" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjgu1MAbGU7c5LzuuR8MdxslCZVOm8YM9mniEu3-PKAAbiy3VNjNEEEEYbgYfQUVVhew56sxuoSCQSaGi6Bqh27WQd3HbL0vaOBN5iTao01ij_TTmveuZbiRA4zsGuRr_h3jx2MIvrgLMdhV-2_WsXdbwMkMbO_fZVewtc2KG9bhrEj_LSDlqR89TyD2wQ/s1280/1001004823.png" alt="Tanda tangan Eldi Sugianto, S.Kom"></td></tr><tr><td>Sekretaris</td><td>........................</td><td>........................</td></tr><tr><td>Bendahara</td><td>........................</td><td>........................</td></tr>
+</tbody></table></div>
+<div class="grid sm:grid-cols-2 gap-5 mt-7 text-sm"><div><span class="text-slate-500">Disahkan di</span><div class="mt-2 border-b border-white/20 pb-2">........................</div></div><div><span class="text-slate-500">Tanggal</span><div class="mt-2 border-b border-white/20 pb-2">........................</div></div></div>
+</div></div></section>
+
+<section id="bab1" class="page py-28 border-t border-white/5">
+<div class="max-w-[1300px] mx-auto px-5 sm:px-8">
+<div class="reveal relative mb-20"><div class="chapter absolute -top-5 left-0">01</div><div class="relative pt-14"><div class="kicker">BAB I</div><h2 class="display text-5xl sm:text-7xl font-black">PENDAHULUAN</h2><p class="mt-4 text-xl text-cyan-300 font-semibold">Membangun respons darurat yang lebih terhubung.</p></div></div>
+<div class="grid lg:grid-cols-[1.15fr_.85fr] gap-8 items-stretch">
+<div class="glass rounded-[2rem] p-7 sm:p-10 reveal"><div class="kicker">1.1 Latar Belakang</div><h3 class="display text-3xl sm:text-4xl font-black mt-3">Setiap detik menentukan.</h3><p class="mt-6 text-slate-300 leading-8">Indonesia merupakan negara rawan bencana dengan 3.544 kejadian bencana sepanjang tahun 2024 (BNPB). Setiap tahunnya, ribuan nyawa melayang karena lambatnya informasi darurat sampai ke warga, kurangnya koordinasi antar-instansi, dan minimnya kanal komunikasi cepat di tingkat komunitas.</p><div class="mt-7 badge"><span class="status validation">Needs Validation</span> Data eksternal perlu diverifikasi sebelum publikasi final.</div></div>
+<div class="glass rounded-[2rem] p-8 reveal flex flex-col justify-between"><div><div class="kicker">2024</div><div class="metric mt-4 text-cyan-300" data-count="3544">0</div><div class="font-bold mt-2">KEJADIAN BENCANA</div><div class="text-sm text-slate-500 mt-2">Sumber yang dicantumkan proposal: BNPB.</div></div><div class="mt-10 h-1 rounded-full bg-white/10 overflow-hidden"><div class="h-full w-[72%] bg-gradient-to-r from-cyan-400 to-blue-500"></div></div></div>
+</div>
+<div class="mt-12"><div class="kicker reveal">Permasalahan Utama</div><div class="grid md:grid-cols-2 lg:grid-cols-5 gap-4 mt-5">
+<div class="glass card-hover rounded-3xl p-5 reveal"><div class="text-2xl">⏱️</div><div class="font-black mt-4">Response Time Lambat</div><p class="text-sm text-slate-500 mt-2">Proposal mencantumkan rata-rata 15–30 menit.</p><span class="status validation mt-4 inline-block">Perlu Validasi</span></div>
+<div class="glass card-hover rounded-3xl p-5 reveal"><div class="text-2xl">📡</div><div class="font-black mt-4">Informasi Terfragmentasi</div><p class="text-sm text-slate-500 mt-2">Warga harus menghubungi berbagai kanal layanan.</p></div>
+<div class="glass card-hover rounded-3xl p-5 reveal"><div class="text-2xl">🔗</div><div class="font-black mt-4">Koordinasi</div><p class="text-sm text-slate-500 mt-2">Antar-instansi membutuhkan konektivitas digital.</p></div>
+<div class="glass card-hover rounded-3xl p-5 reveal"><div class="text-2xl">👥</div><div class="font-black mt-4">Kanal Komunitas</div><p class="text-sm text-slate-500 mt-2">RT/RW dan desa membutuhkan koordinasi lokal.</p></div>
+<div class="glass card-hover rounded-3xl p-5 reveal"><div class="text-2xl">🌐</div><div class="font-black mt-4">Infrastruktur</div><p class="text-sm text-slate-500 mt-2">Kesenjangan akses digital masih perlu diperhatikan.</p></div>
+</div></div>
+<div class="mt-20 grid lg:grid-cols-2 gap-8">
+<div class="glass rounded-[2rem] p-8 reveal"><div class="kicker">1.2 Visi</div><blockquote class="display text-3xl font-black leading-tight mt-4">“Menjadi platform keselamatan komunitas nomor 1 di Indonesia yang menyelamatkan minimal 1 juta nyawa pada tahun 2030.”</blockquote><div class="mt-7 flex items-end gap-4"><div><div class="metric text-cyan-300">1M+</div><div class="text-xs uppercase tracking-widest text-slate-500">Target dampak</div></div><span class="status target mb-2">Target Aspiratif</span></div></div>
+<div class="glass rounded-[2rem] p-8 reveal"><div class="kicker">Misi</div><div class="space-y-5 mt-5">
+<div><b>01.</b> Menghubungkan warga dengan layanan darurat dalam hitungan detik.</div><div><b>02.</b> Memberdayakan komunitas melalui teknologi gotong royong digital.</div><div><b>03.</b> Mendukung instansi pemerintah dengan data real-time untuk pengambilan keputusan.</div><div><b>04.</b> Mengedukasi masyarakat tentang keselamatan dan mitigasi bencana.</div><div><b>05.</b> Membangun ekosistem keselamatan yang berkelanjutan dan inklusif.</div>
+</div></div>
+</div>
+<div class="glass rounded-[2rem] p-8 sm:p-10 mt-8 reveal"><div class="kicker">1.3 Tujuan Proposal</div><div class="grid md:grid-cols-2 lg:grid-cols-5 gap-4 mt-6">
+<div class="p-5 rounded-2xl bg-white/[.035] border border-white/5"><b>01</b><p class="text-sm text-slate-300 mt-3">Kerja sama strategis dengan Pemda, BNPB, Kemenkes, Polri, Kemensos.</p></div>
+<div class="p-5 rounded-2xl bg-white/[.035] border border-white/5"><b>02</b><p class="text-sm text-slate-300 mt-3">Dukungan legalitas dan pengakuan sesuai ketentuan.</p></div>
+<div class="p-5 rounded-2xl bg-white/[.035] border border-white/5"><b>03</b><p class="text-sm text-slate-300 mt-3">Dukungan dana, infrastruktur, SDM dan pelatihan.</p></div>
+<div class="p-5 rounded-2xl bg-white/[.035] border border-white/5"><b>04</b><p class="text-sm text-slate-300 mt-3">Integrasi layanan darurat sesuai kewenangan dan kesiapan teknis.</p></div>
+<div class="p-5 rounded-2xl bg-white/[.035] border border-white/5"><b>05</b><p class="text-sm text-slate-300 mt-3">Perluasan ke seluruh kabupaten/kota di Indonesia.</p></div>
+</div></div>
+</div></section>
+
+<section id="bab2" class="page py-28 bg-white/[.02]">
+<div class="max-w-[1300px] mx-auto px-5 sm:px-8">
+<div class="reveal relative mb-16"><div class="chapter absolute -top-5">02</div><div class="relative pt-14"><div class="kicker">BAB II</div><h2 class="display text-5xl sm:text-7xl font-black">PROFIL SALINK</h2><p class="mt-4 text-xl text-cyan-300 font-semibold">The community safety platform.</p></div></div>
+<div class="grid lg:grid-cols-[.8fr_1.2fr] gap-8">
+<div class="glass rounded-[2rem] p-8 reveal"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh-b9j4cBCdPUpyMmAfxy9HFaYGN-TgSHLckEpd76ocmTcpaADtxDnMheUW04Kf7iTSj7uOq3XI_g62NShO1-mQVvgOUcRN2C712Y9rEPnxqVAdzfiHaNNylKHOhgYNvfUZghHYJbAZkBeYNyTcE53S07ebJtoKnujOWTgUCQ1bRmZEfI9B4ErQ69iWEoA/s512/1000923527.jpg" class="w-40 h-40 rounded-3xl object-cover mx-auto" alt="SALINK"><h3 class="display text-3xl font-black mt-7 text-center">SALINK</h3><p class="text-center text-cyan-300">Sistem Alert Lingkungan</p><div class="mt-8 space-y-4 text-sm"><div class="flex justify-between gap-4"><span class="text-slate-500">Founder</span><b>Eldi Sugianto, S.Kom</b></div><div class="flex justify-between gap-4"><span class="text-slate-500">Berdiri</span><b>2026</b></div><div class="flex justify-between gap-4"><span class="text-slate-500">Versi</span><b>v2.4</b></div><div class="flex justify-between gap-4"><span class="text-slate-500">Platform</span><b>Android • iOS • Web • API</b></div><div class="flex justify-between gap-4"><span class="text-slate-500">Kategori</span><b>Emergency Response</b></div></div></div>
+<div class="glass rounded-[2rem] p-8 reveal"><div class="kicker">2.1 Tentang SALINK</div><h3 class="display text-3xl font-black mt-3">Satu ekosistem untuk warga, komunitas & instansi.</h3><p class="text-slate-300 leading-8 mt-5">SALINK adalah platform keselamatan komunitas berbasis mobile, web dan API yang menghubungkan warga dengan layanan darurat, komunitas warga, data real-time untuk instansi pemerintah, serta edukasi keselamatan dan mitigasi bencana.</p><div class="grid sm:grid-cols-2 gap-4 mt-7"><div class="p-5 rounded-2xl bg-red-500/5 border border-red-500/10"><b>🚨 Layanan Darurat</b><p class="text-sm text-slate-500 mt-2">DAMKAR, RS, Polri, BNPB, SAR.</p></div><div class="p-5 rounded-2xl bg-blue-500/5 border border-blue-500/10"><b>👥 Komunitas</b><p class="text-sm text-slate-500 mt-2">RT/RW/desa dan relawan.</p></div><div class="p-5 rounded-2xl bg-cyan-500/5 border border-cyan-500/10"><b>📊 Data Real-time</b><p class="text-sm text-slate-500 mt-2">Dashboard untuk mitra.</p></div><div class="p-5 rounded-2xl bg-white/[.03] border border-white/5"><b>🎓 Edukasi</b><p class="text-sm text-slate-500 mt-2">Keselamatan & mitigasi.</p></div></div><div class="mt-6"><span class="status internal">Internal claim</span><span class="text-xs text-slate-500 ml-2">Response time &lt;5 menit perlu validasi data.</span></div></div>
+</div>
+<div class="mt-10 glass rounded-[2rem] p-8 reveal"><div class="kicker">2.3 Fitur Utama</div><div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+<button class="text-left p-6 rounded-3xl bg-white/[.035] border border-white/5 card-hover" onclick="feature('🔐 Akun & Keamanan','Login/register, verifikasi email, 2FA opsional, dan perlindungan data sensitif.')"><div class="text-2xl">🔐</div><b class="block mt-4">Akun & Keamanan</b><span class="text-xs text-slate-500">Klik untuk detail</span></button>
+<button class="text-left p-6 rounded-3xl bg-white/[.035] border border-white/5 card-hover" onclick="feature('🚨 Emergency Alert System','Lapor darurat satu klik, empat kategori, radius hingga 50 km, GPS dan broadcast real-time. Spesifikasi perlu validasi operasional.')"><div class="text-2xl">🚨</div><b class="block mt-4">Emergency Alert</b><span class="text-xs text-slate-500">Klik untuk detail</span></button>
+<button class="text-left p-6 rounded-3xl bg-white/[.035] border border-white/5 card-hover" onclick="feature('💬 Komunikasi','Chat real-time, voice note, video call, berbagi media/dokumen dan live location.')"><div class="text-2xl">💬</div><b class="block mt-4">Komunikasi</b><span class="text-xs text-slate-500">Klik untuk detail</span></button>
+<button class="text-left p-6 rounded-3xl bg-white/[.035] border border-white/5 card-hover" onclick="feature('🗺️ Peta & Lokasi','Peta bantuan, fasilitas kesehatan, Polsek dan navigasi. Data fasilitas dan ETA perlu validasi sumber.')"><div class="text-2xl">🗺️</div><b class="block mt-4">Peta & Lokasi</b><span class="text-xs text-slate-500">Klik untuk detail</span></button>
+<button class="text-left p-6 rounded-3xl bg-white/[.035] border border-white/5 card-hover" onclick="feature('📊 Dashboard Instansi','Monitoring laporan, statistik wilayah, heatmap, export dan API untuk mitra.')"><div class="text-2xl">📊</div><b class="block mt-4">Dashboard Instansi</b><span class="text-xs text-slate-500">Klik untuk detail</span></button>
+<button class="text-left p-6 rounded-3xl bg-white/[.035] border border-white/5 card-hover" onclick="feature('🛒 Marketplace Komunitas','Jual beli lokal, rating/review dan chat pembeli-penjual. Komisi 0% adalah model yang diusulkan.')"><div class="text-2xl">🛒</div><b class="block mt-4">Marketplace</b><span class="text-xs text-slate-500">Klik untuk detail</span></button>
+</div></div>
+<div class="mt-10 glass rounded-[2rem] p-8 reveal"><div class="kicker">2.4 Arsitektur Teknologi</div><div class="grid lg:grid-cols-4 gap-3 mt-7">
+<div class="p-6 rounded-3xl border border-cyan-400/20 bg-cyan-400/5"><div class="text-xs tracking-widest text-cyan-300 font-black">01 USER LAYER</div><div class="mt-5 font-black">📱 Android</div><div class="font-black">📱 iOS</div><div class="font-black">💻 Web Browser</div></div>
+<div class="p-6 rounded-3xl border border-blue-400/20 bg-blue-400/5"><div class="text-xs tracking-widest text-blue-300 font-black">02 APPLICATION</div><div class="mt-5 text-sm space-y-2 text-slate-300">React Native<br>Progressive Web App<br>Google Apps Script<br>Firebase Cloud Messaging</div></div>
+<div class="p-6 rounded-3xl border border-purple-400/20 bg-purple-400/5"><div class="text-xs tracking-widest text-purple-300 font-black">03 DATA</div><div class="mt-3 text-[10px] text-cyan-300 font-bold uppercase tracking-widest">IndexedDB → R2 → Supabase → Google Drive Archive → Storage Manager → Retention → Auto Cleanup → Billing Protection</div><div class="mt-5 text-sm space-y-2 text-slate-300">IndexedDB<br>R2<br>Supabase<br>Google Drive Archive<br>Storage Manager<br>Retention<br>Auto Cleanup<br>Billing Protection</div></div>
+<div class="p-6 rounded-3xl border border-red-400/20 bg-red-400/5"><div class="text-xs tracking-widest text-red-300 font-black">04 INTEGRATION</div><div class="mt-5 text-sm space-y-2 text-slate-300">112 / 110 / 113 / 115<br>BMKG<br>BNPB<br>Dukcapil</div><span class="status proposed mt-4 inline-block">Proposed / Target</span></div>
+</div><div class="text-xs text-slate-500 mt-5">Integrasi resmi, akses data, dan koneksi layanan pemerintah harus berdasarkan kewenangan, persetujuan, regulasi, dan perjanjian kerja sama.</div></div>
+</div></section>
+
+<section id="bab3" class="page py-28 border-t border-white/5">
+<div class="max-w-[1300px] mx-auto px-5 sm:px-8">
+<div class="reveal relative mb-16"><div class="chapter absolute -top-5">03</div><div class="relative pt-14"><div class="kicker">BAB III</div><h2 class="display text-5xl sm:text-7xl font-black">ANALISIS SITUASI</h2><p class="mt-4 text-xl text-cyan-300 font-semibold">& kebutuhan.</p></div></div>
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="glass rounded-3xl p-6 reveal"><div class="text-slate-500 text-xs">KEJADIAN BENCANA 2024</div><div class="metric text-cyan-300 mt-3">3.544</div><span class="status validation mt-3 inline-block">BNPB / Validasi</span></div>
+<div class="glass rounded-3xl p-6 reveal"><div class="text-slate-500 text-xs">KORBAN JIWA</div><div class="metric mt-3">489</div><span class="status validation mt-3 inline-block">BNPB / Validasi</span></div>
+<div class="glass rounded-3xl p-6 reveal"><div class="text-slate-500 text-xs">KEBAKARAN PEMUKIMAN</div><div class="metric mt-3">12.400+</div><span class="status validation mt-3 inline-block">Sumber perlu verifikasi</span></div>
+<div class="glass rounded-3xl p-6 reveal"><div class="text-slate-500 text-xs">KASUS KRIMINAL</div><div class="metric mt-3">289K+</div><span class="status validation mt-3 inline-block">Sumber perlu verifikasi</span></div>
+<div class="glass rounded-3xl p-6 reveal"><div class="text-slate-500 text-xs">KECELAKAAN LALU LINTAS</div><div class="metric mt-3">103K+</div><span class="status validation mt-3 inline-block">Sumber perlu verifikasi</span></div>
+<div class="glass rounded-3xl p-6 reveal"><div class="text-slate-500 text-xs">RESPONSE TIME</div><div class="metric mt-3">15–30m</div><span class="status internal mt-3 inline-block">Internal / Validasi</span></div>
+<div class="glass rounded-3xl p-6 reveal"><div class="text-slate-500 text-xs">PENGGUNA SMARTPHONE</div><div class="metric mt-3">89%</div><span class="status validation mt-3 inline-block">APJII / Validasi</span></div>
+</div>
+<div class="mt-12 glass rounded-[2rem] p-8 reveal"><div class="kicker">3.2 Gap Analysis</div><div class="table-wrap mt-6"><table class="proposal-table"><thead><tr><th>Kebutuhan Warga</th><th>Kondisi Saat Ini</th><th>Solusi SALINK</th></tr></thead><tbody>
+<tr><td>Lapor darurat cepat</td><td>Harus telepon satu per satu</td><td>1-click routing / broadcast sesuai integrasi</td></tr>
+<tr><td>Tahu bantuan terdekat</td><td>Tanya tetangga / pencarian umum</td><td>Peta real-time terintegrasi</td></tr>
+<tr><td>Info darurat sekitar</td><td>Broadcast grup</td><td>Push notification berbasis radius</td></tr>
+<tr><td>Koordinasi komunitas</td><td>Manual via grup</td><td>Platform terpusat</td></tr>
+<tr><td>Data untuk Pemda</td><td>Terfragmentasi</td><td>Dashboard analytics</td></tr>
+</tbody></table></div></div>
+<div class="mt-8 glass rounded-[2rem] p-8 reveal"><div class="kicker">3.3 Target Penerima Manfaat</div><div class="grid lg:grid-cols-2 gap-8 mt-6">
+<div><span class="badge">Target Primer</span><div class="mt-5 space-y-4"><div class="p-4 rounded-2xl bg-white/[.035]">10 kabupaten/kota pilot — estimasi 500.000 jiwa</div><div class="p-4 rounded-2xl bg-white/[.035]">1.000 desa/kelurahan — relawan Karang Taruna</div><div class="p-4 rounded-2xl bg-white/[.035]">Tim siaga bencana tingkat RT/RW</div></div></div>
+<div><span class="badge">Target Sekunder</span><div class="mt-5 flex flex-wrap gap-2">Pemda BNPB DAMKAR Polri Dinkes Dinsos PMI Tagana BASARNAS Sekolah Kampus</div><span class="status target mt-5 inline-block">Projection / Target</span></div>
+</div></div>
+</div></section>
+
+<section id="bab4" class="page py-28 bg-white/[.02]">
+<div class="max-w-[1300px] mx-auto px-5 sm:px-8">
+<div class="reveal relative mb-16"><div class="chapter absolute -top-5">04</div><div class="relative pt-14"><div class="kicker">BAB IV</div><h2 class="display text-5xl sm:text-7xl font-black">KERJA SAMA</h2><p class="mt-4 text-xl text-cyan-300 font-semibold">Partnership proposal.</p></div></div>
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="glass card-hover rounded-3xl p-6 reveal"><div class="kicker">Pemerintah Daerah</div><h3 class="display text-2xl font-black mt-3">Pilot Project</h3><p class="text-sm text-slate-500 mt-3">Implementasi di kabupaten/kota terpilih.</p><span class="status proposed mt-5 inline-block">Proposed Output</span></div>
+<div class="glass card-hover rounded-3xl p-6 reveal"><div class="kicker">Dashboard</div><h3 class="display text-2xl font-black mt-3">Monitoring</h3><p class="text-sm text-slate-500 mt-3">Dashboard untuk mendukung pemantauan.</p><span class="status proposed mt-5 inline-block">Proposed Output</span></div>
+<div class="glass card-hover rounded-3xl p-6 reveal"><div class="kicker">Pelatihan</div><h3 class="display text-2xl font-black mt-3">500 Relawan</h3><p class="text-sm text-slate-500 mt-3">Program training dalam skenario kerja sama.</p><span class="status target mt-5 inline-block">Target</span></div>
+<div class="glass card-hover rounded-3xl p-6 reveal"><div class="kicker">Edukasi</div><h3 class="display text-2xl font-black mt-3">10.000 Warga</h3><p class="text-sm text-slate-500 mt-3">Sosialisasi keselamatan dalam skenario pilot.</p><span class="status target mt-5 inline-block">Target</span></div>
+</div>
+<div class="mt-10 glass rounded-[2rem] p-8 reveal"><div class="kicker">Instansi Vertikal</div><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+<div class="p-5 rounded-2xl bg-white/[.035]"><b>BNPB</b><p class="text-sm text-slate-500 mt-2">Data bencana / API peringatan dini.</p></div>
+<div class="p-5 rounded-2xl bg-white/[.035]"><b>Kemenkes</b><p class="text-sm text-slate-500 mt-2">Koneksi RS/Puskesmas dan informasi layanan.</p></div>
+<div class="p-5 rounded-2xl bg-white/[.035]"><b>Polri</b><p class="text-sm text-slate-500 mt-2">Alert kriminal / layanan 110.</p></div>
+<div class="p-5 rounded-2xl bg-white/[.035]"><b>DAMKAR</b><p class="text-sm text-slate-500 mt-2">Alert kebakaran / response monitoring.</p></div>
+<div class="p-5 rounded-2xl bg-white/[.035]"><b>BASARNAS</b><p class="text-sm text-slate-500 mt-2">Koordinasi SAR / lokasi.</p></div>
+<div class="p-5 rounded-2xl bg-white/[.035]"><b>Kominfo / Kementerian terkait</b><p class="text-sm text-slate-500 mt-2">Infrastruktur digital dan aspek regulasi.</p></div>
+</div></div>
+<div class="mt-10 glass rounded-[2rem] p-8 reveal"><div class="kicker">Lembaga Sosial</div><div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6"><div class="p-5 rounded-2xl bg-white/[.035]"><b>PMI</b><p class="text-sm text-slate-500 mt-2">Donor darah & bantuan medis.</p></div><div class="p-5 rounded-2xl bg-white/[.035]"><b>Tagana</b><p class="text-sm text-slate-500 mt-2">Relawan siaga bencana.</p></div><div class="p-5 rounded-2xl bg-white/[.035]"><b>Karang Taruna</b><p class="text-sm text-slate-500 mt-2">Basis komunitas.</p></div><div class="p-5 rounded-2xl bg-white/[.035]"><b>PKK</b><p class="text-sm text-slate-500 mt-2">Edukasi keluarga.</p></div></div></div>
+<div class="mt-10 grid lg:grid-cols-3 gap-4">
+<div class="glass rounded-3xl p-7 reveal"><div class="kicker">Skema A</div><h3 class="display text-2xl font-black mt-2">Government-Funded</h3><ul class="mt-5 text-sm text-slate-300 space-y-3 list-disc pl-5"><li>Pemerintah mendanai pengembangan & operasional.</li><li>SALINK tetap gratis untuk warga.</li><li>Dashboard eksklusif + analytics sesuai kesepakatan.</li></ul></div>
+<div class="glass rounded-3xl p-7 reveal"><div class="kicker">Skema B</div><h3 class="display text-2xl font-black mt-2">Public-Private Partnership</h3><ul class="mt-5 text-sm text-slate-300 space-y-3 list-disc pl-5"><li>Pemerintah: infrastruktur & aspek kelembagaan.</li><li>SALINK: teknologi & operasional.</li><li>Revenue sharing premium bila disepakati.</li></ul></div>
+<div class="glass rounded-3xl p-7 reveal"><div class="kicker">Skema D</div><h3 class="display text-2xl font-black mt-2">Kemitraan Otonom</h3><ul class="mt-5 text-sm text-slate-300 space-y-3 list-disc pl-5"><li>SALINK beroperasi mandiri.</li><li>Dukungan pemerintah sesuai kewenangan.</li><li>Pendanaan melalui CSR & hibah.</li></ul></div>
+</div>
+<div class="mt-10 glass rounded-[2rem] p-8 reveal"><div class="kicker">4.3 Kebutuhan Sumber Daya</div><div class="table-wrap mt-6"><table class="proposal-table"><thead><tr><th>Kategori</th><th>Item</th><th>Estimasi</th></tr></thead><tbody>
+<tr><td>Infrastruktur</td><td>Server & cloud (1 tahun)</td><td>Rp 250.000.000</td></tr><tr><td>Pengembangan</td><td>Dashboard Pemda</td><td>Rp 500.000.000</td></tr><tr><td>Integrasi</td><td>API layanan darurat</td><td>Rp 300.000.000</td></tr><tr><td>Sosialisasi</td><td>Kampanye 10 kab/kota</td><td>Rp 1.500.000.000</td></tr><tr><td>Pelatihan</td><td>5.000 relawan</td><td>Rp 750.000.000</td></tr><tr><td>Operasional</td><td>Support 24/7 (1 tahun)</td><td>Rp 600.000.000</td></tr><tr><td>Cadangan</td><td>Kontingensi 10%</td><td>Rp 390.000.000</td></tr><tr class="font-black"><td colspan="2">TOTAL PROPOSED BUDGET</td><td>Rp 4.290.000.000</td></tr>
+</tbody></table></div><div class="mt-5 text-xs text-slate-500">Anggaran di atas adalah estimasi proposal dan perlu penyusunan RAB/justifikasi biaya sebelum komitmen.</div></div>
+</div></section>
+
+<section id="bab5" class="page py-28">
+<div class="max-w-[1300px] mx-auto px-5 sm:px-8">
+<div class="reveal relative mb-16"><div class="chapter absolute -top-5">05</div><div class="relative pt-14"><div class="kicker">BAB V</div><h2 class="display text-5xl sm:text-7xl font-black">ROADMAP</h2><p class="mt-4 text-xl text-cyan-300 font-semibold">Implementasi 24 bulan.</p></div></div>
+<div class="timeline space-y-8">
+<div class="timeline-item reveal"><span class="timeline-dot"></span><div class="glass rounded-3xl p-7"><div class="flex flex-wrap items-center gap-3"><span class="badge">Bulan 1–3</span><span class="status proposed">Fase 1</span></div><h3 class="display text-2xl font-black mt-3">PERSIAPAN</h3><p class="text-slate-400 mt-2">MoU, steering committee, infrastruktur, integrasi API, audit keamanan & sertifikasi sesuai kebutuhan.</p></div></div>
+<div class="timeline-item reveal"><span class="timeline-dot"></span><div class="glass rounded-3xl p-7"><div class="flex flex-wrap items-center gap-3"><span class="badge">Bulan 4–9</span><span class="status target">Fase 2</span></div><h3 class="display text-2xl font-black mt-3">PILOT PROJECT</h3><p class="text-slate-400 mt-2">3 kab/kota, 500 relawan, 50.000 warga, monitoring & evaluasi bulanan.</p></div></div>
+<div class="timeline-item reveal"><span class="timeline-dot"></span><div class="glass rounded-3xl p-7"><div class="flex flex-wrap items-center gap-3"><span class="badge">Bulan 10–18</span><span class="status target">Fase 3</span></div><h3 class="display text-2xl font-black mt-3">SCALE UP</h3><p class="text-slate-400 mt-2">Ekspansi 10 kab/kota, target integrasi layanan 112, dashboard provinsi & kampanye.</p></div></div>
+<div class="timeline-item reveal"><span class="timeline-dot"></span><div class="glass rounded-3xl p-7"><div class="flex flex-wrap items-center gap-3"><span class="badge">Bulan 19–24</span><span class="status target">Fase 4</span></div><h3 class="display text-2xl font-black mt-3">SUSTAINABILITY</h3><p class="text-slate-400 mt-2">Handover, fitur premium, audit dampak sosial & perencanaan ekspansi nasional.</p></div></div>
+</div>
+<div class="mt-12 glass rounded-[2rem] p-8 reveal"><div class="kicker">5.2 Milestone & KPI</div><div class="table-wrap mt-6"><table class="proposal-table"><thead><tr><th>Bulan</th><th>Milestone</th><th>KPI</th></tr></thead><tbody>
+<tr><td>3</td><td>MoU ditandatangani</td><td>Legalitas / kesepakatan</td></tr><tr><td>6</td><td>Pilot 3 kab/kota</td><td>50.000 user target</td></tr><tr><td>9</td><td>Response time</td><td>&lt; 5 menit target</td></tr><tr><td>12</td><td>Ekspansi 10 kab/kota</td><td>500.000 user target</td></tr><tr><td>18</td><td>Integrasi 112</td><td>1 juta user target</td></tr><tr><td>24</td><td>Handover & sustainability</td><td>5 juta user target</td></tr>
+</tbody></table></div><div class="mt-5"><span class="status target">TARGET KPI</span><span class="text-xs text-slate-500 ml-2">Bukan pencapaian aktual.</span></div></div>
+</div></section>
+
+<section id="bab6" class="page py-28 bg-white/[.02]">
+<div class="max-w-[1300px] mx-auto px-5 sm:px-8">
+<div class="reveal relative mb-16"><div class="chapter absolute -top-5">06</div><div class="relative pt-14"><div class="kicker">BAB VI</div><h2 class="display text-5xl sm:text-7xl font-black">DAMPAK & KEBERLANJUTAN</h2><p class="mt-4 text-xl text-cyan-300 font-semibold">Projected social impact.</p></div></div>
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="glass rounded-3xl p-6 reveal"><div class="text-slate-500 text-xs">RESPONSE TIME</div><div class="text-2xl font-black mt-3">15–30m → &lt;5m</div><div class="mt-3 text-cyan-300 font-black">75%</div><div class="text-xs text-slate-500">improvement target</div></div>
+<div class="glass rounded-3xl p-6 reveal"><div class="text-slate-500 text-xs">KORBAN JIWA</div><div class="text-2xl font-black mt-3">−40%</div><div class="mt-3 text-xs text-slate-500">target reduction di pilot</div></div>
+<div class="glass rounded-3xl p-6 reveal"><div class="text-slate-500 text-xs">KERUGIAN MATERI</div><div class="text-2xl font-black mt-3">−60%</div><div class="mt-3 text-xs text-slate-500">target reduction</div></div>
+<div class="glass rounded-3xl p-6 reveal"><div class="text-slate-500 text-xs">KEPUASAN WARGA</div><div class="text-2xl font-black mt-3">&gt;90%</div><div class="mt-3 text-xs text-slate-500">target</div></div>
+</div>
+<div class="mt-5"><span class="status target">PROJECTED IMPACT</span><span class="text-xs text-slate-500 ml-2">Angka berasal dari asumsi proposal dan perlu validasi pilot.</span></div>
+<div class="mt-12 grid lg:grid-cols-2 gap-8">
+<div class="glass rounded-[2rem] p-8 reveal"><div class="kicker">Dampak Kualitatif</div><div class="space-y-4 mt-6"><div class="p-4 rounded-2xl bg-white/[.035]">Warga lebih tenang karena memiliki kanal perlindungan.</div><div class="p-4 rounded-2xl bg-white/[.035]">Komunitas lebih solid dengan gotong royong digital.</div><div class="p-4 rounded-2xl bg-white/[.035]">Pihak terkait memperoleh data real-time untuk koordinasi.</div><div class="p-4 rounded-2xl bg-white/[.035]">Relawan lebih terkoordinasi melalui platform terpusat.</div></div></div>
+<div class="glass rounded-[2rem] p-8 reveal"><div class="kicker">6.2 Cost-Benefit</div><div class="grid grid-cols-2 gap-3 mt-6"><div class="p-5 rounded-2xl bg-white/[.035]"><span class="text-xs text-slate-500">WITHOUT</span><div class="font-black mt-2">15–30 menit</div></div><div class="p-5 rounded-2xl bg-cyan-500/5 border border-cyan-400/10"><span class="text-xs text-cyan-300">WITH</span><div class="font-black mt-2">&lt; 5 menit</div></div><div class="p-5 rounded-2xl bg-white/[.035]"><span class="text-xs text-slate-500">KERUGIAN</span><div class="font-black mt-2">Rp 50 M</div></div><div class="p-5 rounded-2xl bg-cyan-500/5 border border-cyan-400/10"><span class="text-xs text-cyan-300">PROYEKSI</span><div class="font-black mt-2">Rp 20 M</div></div></div><div class="mt-6 flex items-end gap-4"><div><div class="metric text-cyan-300">Rp 32 M</div><div class="text-xs text-slate-500">proyeksi savings / tahun</div></div><div><div class="text-3xl font-black">646%</div><div class="text-xs text-slate-500">ROI proposal</div></div></div><span class="status internal mt-5 inline-block">Simulation / Assumption</span></div>
+</div>
+<div class="mt-10 glass rounded-[2rem] p-8 reveal"><div class="kicker">6.3 Strategi Keberlanjutan</div><div class="grid lg:grid-cols-3 gap-4 mt-6">
+<div class="p-6 rounded-3xl bg-white/[.035]"><span class="badge">1–2 Tahun</span><h3 class="font-black text-xl mt-4">Jangka Pendek</h3><p class="text-sm text-slate-500 mt-3">CSR BUMN/swasta, hibah lembaga internasional, riset universitas.</p></div>
+<div class="p-6 rounded-3xl bg-white/[.035]"><span class="badge">3–5 Tahun</span><h3 class="font-black text-xl mt-4">Jangka Menengah</h3><p class="text-sm text-slate-500 mt-3">Freemium, marketplace komisi rendah, iklan non-intrusive dari mitra.</p></div>
+<div class="p-6 rounded-3xl bg-white/[.035]"><span class="badge">5–10 Tahun</span><h3 class="font-black text-xl mt-4">Jangka Panjang</h3><p class="text-sm text-slate-500 mt-3">White-label, API as a Service, analytics untuk instansi.</p></div>
+</div></div>
+</div></section>
+
+<section id="bab7" class="page py-28 relative overflow-hidden">
+<div class="absolute inset-0 hero-glow grid-bg"></div><div class="relative max-w-[1300px] mx-auto px-5 sm:px-8">
+<div class="reveal relative mb-16"><div class="chapter absolute -top-5">07</div><div class="relative pt-14"><div class="kicker">BAB VII</div><h2 class="display text-5xl sm:text-7xl font-black">PENUTUP</h2><p class="mt-4 text-xl text-cyan-300 font-semibold">From proposal to collaboration.</p></div></div>
+<div class="grid lg:grid-cols-[1.15fr_.85fr] gap-8">
+<div class="glass rounded-[2rem] p-8 sm:p-10 reveal"><div class="kicker">7.1 Kesimpulan</div><h3 class="display text-4xl font-black mt-4">SALINK bukan sekadar aplikasi.</h3><p class="text-xl text-slate-300 leading-8 mt-5">“Ini adalah gerakan nasional untuk menyelamatkan nyawa melalui teknologi.”</p><div class="grid sm:grid-cols-2 gap-4 mt-8"><div class="p-5 rounded-2xl bg-white/[.035]">✓ Sistem peringatan dini komunitas</div><div class="p-5 rounded-2xl bg-white/[.035]">✓ Platform integrasi antar-instansi</div><div class="p-5 rounded-2xl bg-white/[.035]">✓ Sumber data real-time</div><div class="p-5 rounded-2xl bg-white/[.035]">✓ Model keberlanjutan digital</div></div><div class="mt-6"><span class="status proposed">Vision / Proposed Positioning</span><span class="text-xs text-slate-500 ml-2">Klaim “pertama di Indonesia” memerlukan pembuktian.</span></div></div>
+<div class="glass rounded-[2rem] p-8 reveal"><div class="kicker">7.2 Ajakan Kerja Sama</div><h3 class="display text-3xl font-black mt-4">Mari membangun komunitas yang lebih siaga.</h3><ul class="mt-6 space-y-4 text-slate-300"><li>• Penandatanganan MoU kerja sama strategis</li><li>• Dukungan legalitas/kelembagaan sesuai kewenangan</li><li>• Dukungan dana, SDM dan infrastruktur</li><li>• Integrasi dengan layanan existing berdasarkan persetujuan</li><li>• Sosialisasi bersama ke masyarakat</li></ul><a href="#contact" class="btn btn-primary mt-8">Ajukan Kerja Sama →</a></div>
+</div>
+</div></section>
+
+<section id="contact" class="py-24 border-t border-white/5">
+<div class="max-w-[1200px] mx-auto px-5 sm:px-8">
+<div class="reveal text-center"><div class="kicker">7.3 Kontak & Informasi</div><h2 class="display text-4xl sm:text-6xl font-black mt-3">Terhubung dengan SALINK.</h2></div>
+<div class="grid lg:grid-cols-2 gap-8 mt-10">
+<div class="glass rounded-[2rem] p-8 reveal"><div class="flex items-center gap-5"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh-b9j4cBCdPUpyMmAfxy9HFaYGN-TgSHLckEpd76ocmTcpaADtxDnMheUW04Kf7iTSj7uOq3XI_g62NShO1-mQVvgOUcRN2C712Y9rEPnxqVAdzfiHaNNylKHOhgYNvfUZghHYJbAZkBeYNyTcE53S07ebJtoKnujOWTgUCQ1bRmZEfI9B4ErQ69iWEoA/s512/1000923527.jpg" class="w-20 h-20 rounded-2xl object-cover" alt="SALINK"><div><div class="font-black text-2xl">Eldi Sugianto, S.Kom</div><div class="text-cyan-300">Founder & Developer SALINK</div><div class="text-sm text-slate-500">Komunitas Karang Taruna SALINK</div></div></div>
+<div class="mt-8 space-y-4 text-sm">
+<div><span class="text-slate-500">Website</span><a class="block text-cyan-300 break-all hover:underline" href="https://salink-emergency.vercel.app/" target="_blank" rel="noopener">https://salink-emergency.vercel.app/</a></div>
+<div><span class="text-slate-500">Email Utama</span><div>teslasmartonlineshop@gmail.com</div></div>
+<div><span class="text-slate-500">Email Kerja Sama</span><div class="text-slate-500">Belum tersedia</div></div>
+<div><span class="text-slate-500">WhatsApp</span><a class="block text-cyan-300 hover:underline" href="https://wa.me/6285218483129" target="_blank" rel="noopener">0852-1848-3129</a></div>
+<div><span class="text-slate-500">Sekretariat</span><div>Jl. KH. Abdul Hamid Km 15 Desa Ciasmara Kecamatan Pamijahan Kabupaten Bogor Kode POS 16810</div></div>
+</div></div>
+<div class="glass rounded-[2rem] p-8 reveal"><div class="kicker">Digital Presence</div><div class="grid sm:grid-cols-2 gap-3 mt-6">
+<a class="p-5 rounded-2xl bg-white/[.035] border border-white/5 card-hover" target="_blank" rel="noopener" href="https://www.instagram.com/teslasmart_onlineshop?igsh=MWR2dWM2bXBiY2V6eQ=="><b>Instagram</b><div class="text-xs text-slate-500 mt-2">TeslaSmart Online Shop</div></a>
+<a class="p-5 rounded-2xl bg-white/[.035] border border-white/5 card-hover" target="_blank" rel="noopener" href="https://www.facebook.com/share/ZZZ7RYBWbxiF7S1t/?mibextid=qi2Omg"><b>Facebook</b><div class="text-xs text-slate-500 mt-2">Social profile</div></a>
+<a class="p-5 rounded-2xl bg-white/[.035] border border-white/5 card-hover" target="_blank" rel="noopener" href="https://www.tiktok.com/@teslasmart.online?_r=1&_t=ZS-99ZK3v6aGnA"><b>TikTok</b><div class="text-xs text-slate-500 mt-2">@teslasmart.online</div></a>
+<a class="p-5 rounded-2xl bg-white/[.035] border border-white/5 card-hover" target="_blank" rel="noopener" href="https://www.youtube.com/@TeslaSmart_Onlineshop"><b>YouTube</b><div class="text-xs text-slate-500 mt-2">TeslaSmart Onlineshop</div></a>
+<a class="p-5 rounded-2xl bg-white/[.035] border border-white/5 card-hover sm:col-span-2" target="_blank" rel="noopener" href="https://bio-data-pi-three.vercel.app/"><b>Portofolio</b><div class="text-xs text-slate-500 mt-2">Bio / portfolio</div></a>
+</div></div>
+</div></div></section>
+
+<section id="appendix" class="page py-24 bg-white/[.02]">
+<div class="max-w-[1200px] mx-auto px-5 sm:px-8">
+<div class="reveal relative mb-12"><div class="chapter absolute -top-5">A</div><div class="relative pt-14"><div class="kicker">Lampiran</div><h2 class="display text-5xl sm:text-6xl font-black">DOKUMEN & PERSETUJUAN</h2></div></div>
+<div class="grid lg:grid-cols-3 gap-5">
+<div class="glass rounded-3xl p-7 reveal"><div class="kicker">Lampiran A</div><h3 class="font-black text-xl mt-3">Dokumen Legal</h3><div class="space-y-3 mt-6 text-sm text-slate-300"><label class="flex gap-3"><input type="checkbox"> Rekening Bank Organisasi</label></div></div>
+<div class="glass rounded-3xl p-7 reveal"><div class="kicker">Lampiran B</div><h3 class="font-black text-xl mt-3">Dokumen Teknis</h3><div class="space-y-3 mt-6 text-sm text-slate-300"><label class="flex gap-3"><input type="checkbox"> Arsitektur sistem detail</label></div></div>
+<div class="glass rounded-3xl p-7 reveal"><div class="kicker">Lampiran C</div><h3 class="font-black text-xl mt-3">Dukungan & Rekomendasi</h3><div class="space-y-3 mt-6 text-sm text-slate-300"><label class="flex gap-3"><input type="checkbox"> Surat rekomendasi Karang Taruna Pusat</label><label class="flex gap-3"><input type="checkbox"> Surat dukungan tokoh masyarakat</label><label class="flex gap-3"><input type="checkbox"> Testimoni kepala daerah pilot</label><label class="flex gap-3"><input type="checkbox"> Rekomendasi instansi terkait</label></div></div>
+</div>
+<div class="grid lg:grid-cols-2 gap-6 mt-8">
+<div class="glass rounded-3xl p-7 reveal"><div class="kicker">Lembar Persetujuan Penerima</div><div class="space-y-5 mt-6 text-sm"><div><span class="text-slate-500">Nama Instansi</span><div class="border-b border-white/20 py-2">................................................</div></div><div><span class="text-slate-500">Nama Pejabat</span><div class="border-b border-white/20 py-2">................................................</div></div><div><span class="text-slate-500">Jabatan</span><div class="border-b border-white/20 py-2">................................................</div></div><div><span class="text-slate-500">Tanggal</span><div class="border-b border-white/20 py-2">................................................</div></div><div class="h-24 rounded-2xl border border-dashed border-white/15 flex items-center justify-center text-slate-600">Tanda Tangan & Stempel Resmi</div></div></div>
+<div class="glass rounded-3xl p-7 reveal"><div class="kicker">Lembar Persetujuan Pengusul</div><h3 class="display text-2xl font-black mt-3">Eldi Sugianto, S.Kom</h3><p class="text-cyan-300 mt-1">Founder & Developer SALINK</p><p class="text-slate-500 text-sm">Karang Taruna</p><div class="mt-10 h-28 border-b border-white/20 flex items-end justify-center pb-2"><img class="proposer-signature" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjgu1MAbGU7c5LzuuR8MdxslCZVOm8YM9mniEu3-PKAAbiy3VNjNEEEEYbgYfQUVVhew56sxuoSCQSaGi6Bqh27WQd3HbL0vaOBN5iTao01ij_TTmveuZbiRA4zsGuRr_h3jx2MIvrgLMdhV-2_WsXdbwMkMbO_fZVewtc2KG9bhrEj_LSDlqR89TyD2wQ/s1280/1001004823.png" alt="Tanda tangan Eldi Sugianto, S.Kom"></div><div class="mt-6 border-b border-white/20 py-2">Tanggal: ........................................</div></div>
+</div>
+</div></section>
+
+<footer class="py-16 border-t border-white/5">
+<div class="max-w-[1200px] mx-auto px-5 sm:px-8 flex flex-col md:flex-row justify-between gap-8">
+<div class="flex gap-4"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh-b9j4cBCdPUpyMmAfxy9HFaYGN-TgSHLckEpd76ocmTcpaADtxDnMheUW04Kf7iTSj7uOq3XI_g62NShO1-mQVvgOUcRN2C712Y9rEPnxqVAdzfiHaNNylKHOhgYNvfUZghHYJbAZkBeYNyTcE53S07ebJtoKnujOWTgUCQ1bRmZEfI9B4ErQ69iWEoA/s512/1000923527.jpg" class="w-14 h-14 rounded-2xl object-cover" alt="SALINK"><div><div class="font-black text-xl">SALINK</div><div class="text-sm text-slate-500">Sistem Alert Lingkungan Terpadu</div><div class="text-xs text-slate-600 mt-2">Community-powered emergency response ecosystem.</div></div></div>
+<div class="text-left md:text-right text-xs text-slate-500"><div>Proposal Version 2.4 — Final</div><div class="mt-2">© 2026 SALINK. All Rights Reserved.</div><div class="mt-2 text-slate-400">“Satu Aplikasi, Ribuan Nyawa Terlindungi.”</div></div>
+</div>
+</footer>
+</main>
+
+<div id="modal" class="modal fixed inset-0 z-[90] bg-black/70 backdrop-blur-md flex items-center justify-center p-5" onclick="closeModal(event)">
+<div class="glass max-w-lg w-full rounded-[2rem] p-8" onclick="event.stopPropagation()"><div class="flex justify-between gap-5"><div><div class="kicker">SALINK Feature</div><h3 id="modalTitle" class="display text-3xl font-black mt-2"></h3></div><button class="w-10 h-10 rounded-xl border border-white/10" onclick="closeModal()">×</button></div><p id="modalBody" class="text-slate-300 leading-7 mt-6"></p><button class="btn btn-primary mt-7" onclick="closeModal()">Tutup</button></div>
+</div>
+
+<div class="no-print fixed right-4 bottom-4 z-50 flex flex-col gap-2">
+<button class="btn btn-ghost shadow-xl" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Top</button>
+</div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+function toggleMenu(){$('#mobileMenu').classList.toggle('hidden')}
+function feature(title,body){$('#modalTitle').textContent=title;$('#modalBody').textContent=body;$('#modal').classList.add('open')}
+function closeModal(e){if(!e||e.target===$('#modal'))$('#modal').classList.remove('open')}
+function presentationMode(){
+  document.body.classList.add('presentation');
+  const el=document.documentElement;
+  if(el.requestFullscreen) el.requestFullscreen().catch(()=>{});
+  document.body.style.setProperty('--pres','1');
+  alert('Presentation Mode aktif. Gunakan Arrow Right / Left untuk berpindah antar bab, ESC untuk keluar.');
+}
+const chapters=['cover','toc','bab1','bab2','bab3','bab4','bab5','bab6','bab7','appendix'];
+let slide=0;
+function goSlide(dir){slide=Math.max(0,Math.min(chapters.length-1,slide+dir));document.getElementById(chapters[slide]).scrollIntoView({behavior:'smooth'});}
+document.addEventListener('keydown',e=>{
+ if(e.key==='Escape'){document.body.classList.remove('presentation');if(document.fullscreenElement)document.exitFullscreen().catch(()=>{})}
+ if(document.body.classList.contains('presentation')){
+   if(e.key==='ArrowRight'){e.preventDefault();goSlide(1)}
+   if(e.key==='ArrowLeft'){e.preventDefault();goSlide(-1)}
+ }
+});
+window.addEventListener('scroll',()=>{
+ const y=scrollY, h=document.documentElement.scrollHeight-innerHeight;
+ $('#progress').style.width=(h?Math.min(100,y/h*100):0)+'%';
+ const sections=[...$$('section[id]')];
+ let current='cover';
+ sections.forEach(s=>{if(y+140>=s.offsetTop)current=s.id});
+ $$('#desktopNav .nav-link').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+current));
+});
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.12});
+$$('.reveal').forEach(el=>obs.observe(el));
+function counters(){
+ $$('[data-count]').forEach(el=>{
+  if(el.dataset.done)return;
+  const r=new IntersectionObserver(es=>{es.forEach(x=>{if(x.isIntersecting){el.dataset.done='1';let target=+el.dataset.count,start=0,d=900,t0=performance.now();function tick(t){let p=Math.min(1,(t-t0)/d),v=Math.floor(target*(1-Math.pow(1-p,3)));el.textContent=v.toLocaleString('id-ID');if(p<1)requestAnimationFrame(tick)}requestAnimationFrame(tick);r.disconnect()}})});
+  r.observe(el);
+ });
+}
+counters();
+window.addEventListener('load',()=>{
+ let n=0;const bar=$('#loadbar'),pct=$('#loadpct'),loader=$('#loader');
+ const timer=setInterval(()=>{n=Math.min(100,n+20);bar.style.width=n+'%';pct.textContent=n+'%';if(n>=100){clearInterval(timer);setTimeout(()=>loader.style.opacity='0',250);setTimeout(()=>loader.remove(),650)}},180);
+});
+</script>
+</body>
+</html>
